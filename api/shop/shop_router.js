@@ -10,7 +10,8 @@ Router.get("/shop",function(req,res){
     // connect.get_shop(function(results){
     //      res.send(results)
     // })
-    data.get_shop_msg().then(val=>{
+    
+    data.get_shop_msg(req.query.page,req.query.cateName).then(val=>{
         res.send(val)
     })
 })

@@ -1,7 +1,7 @@
 const connect = require("./shop_sql")
 
-function get_shop_msg(){
-    const data = connect.get_shop_msg()
+function get_shop_msg(page,type){
+    const data = connect.get_shop_msg(page,type)
     let shop_data = []
     return data.then(val=>{
         // 1把主要信息放入
