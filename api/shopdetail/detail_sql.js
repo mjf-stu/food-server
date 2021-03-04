@@ -17,13 +17,19 @@ function getTagName(shop_id){
 }
 exports.getTagName = getTagName
 
-function getFoodSpus(shop_id,tagName){
+function getFoodSpus(shop_id,tagName,tag){
     shop_id = parseInt(shop_id)
-    const query = "select * from foodspus where shop_id = "+shop_id+" and tagName = '"+tagName+"'"
+    let query = "select * from foodspus where shop_id = "+shop_id+" and tagName = '"+tagName+"'"
+    if(tagName === "热销"){
+      query = "select * from foodspus where shop_id = "+shop_id+" order by saleCount desc limit 10";
+    }
+    else if(tagName === "折扣"){
+      query = "select * from foodspus where shop_id = "+shop_id+" and originPrice <> ''"
+    }
     return new Promise((resolve,reject)=>{
         connect.query(query,function(err,results,fields){
             if(err) reject(err)
-            resolve(results)
+            resolve({tag:tag,spus:results})
         })
     })
 }
