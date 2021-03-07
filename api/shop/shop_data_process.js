@@ -24,3 +24,9 @@ function get_shop_msg(page,type){
 }
 
 exports.get_shop_msg = get_shop_msg
+
+function getShopById(shop_id){
+    return connect.getShopById(shop_id)
+}
+
+exports.getShopById = getShopById

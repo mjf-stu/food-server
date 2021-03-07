@@ -16,4 +16,11 @@ Router.get("/shop",function(req,res){
     })
 })
 
+Router.get("/shop/id",function(req,res){
+    data.getShopById(req.query.shop_id)
+    .then(val=>{
+        res.send(val)
+    })
+})
+
 module.exports = Router

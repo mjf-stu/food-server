@@ -52,3 +52,14 @@ async function get_shop_msg(page,type){
 }
 
 exports.get_shop_msg = get_shop_msg
+
+function getShopById(shop_id){
+    let query = "select * from shopmainmsg where shop_id = "+shop_id
+    return new Promise((resolve,reject)=>{
+        connect.query(query,function(err,results,fields){
+            resolve(results[0])
+        })
+    })
+}
+
+exports.getShopById = getShopById
