@@ -11,7 +11,7 @@ Router.get("/shop",function(req,res){
     //      res.send(results)
     // })
     
-    data.get_shop_msg(req.query.page,req.query.cateName).then(val=>{
+    data.get_shop_msg(req.query.page,req.query.cateName,req.query.sort).then(val=>{
         res.send(val)
     })
 })

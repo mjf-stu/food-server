@@ -18,7 +18,7 @@ const connect = require("../../connection")
 
 // async+await的方式进行
 // 获取商店所有数据
-async function get_shop_msg(page,type){
+async function get_shop_msg(page,type,sort){
     let shop_main_msg = null
     let shop_smarttag_msg = null
     let shop_prefer_msg = null
@@ -26,7 +26,13 @@ async function get_shop_msg(page,type){
     page = page * 5
     try{
     shop_main_msg = await new Promise((resolve,reject)=>{
-        let selectQuery = "select * from shopmainmsg where cateName like '%"+type+"%' limit "+ page +",5"
+        let selectQuery = ""
+        if(sort===""){
+            selectQuery = "select * from shopmainmsg where cateName like '%"+type+"%'  limit "+ page +",5"
+        }
+        else{
+            selectQuery = "select * from shopmainmsg where cateName like '%"+type+"%' order by "+sort+" limit "+ page +",5"
+        }
         // let selectQuery = "select * from shopmainmsg where shop_id in ("+[1,2,3].toString()+")"
         connect.query(selectQuery,function(err,results,fields){
             if(err) reject(err)
